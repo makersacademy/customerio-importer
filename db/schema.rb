@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_15_105429) do
+ActiveRecord::Schema.define(version: 2018_05_15_120830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "contacts", force: :cascade do |t|
-    t.string "name"
     t.string "email"
     t.boolean "b2c_customer"
     t.boolean "b2c_alumnus"
@@ -26,6 +25,8 @@ ActiveRecord::Schema.define(version: 2018_05_15_105429) do
     t.boolean "other"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
   end
 
 end

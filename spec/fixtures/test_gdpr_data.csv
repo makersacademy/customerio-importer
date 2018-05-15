@@ -1,0 +1,18 @@
+Name,Email,B2C Customer (Opt-out),B2C Alumnus (Opt-out),B2C Apprentice (Opt-out),B2C Fellow (Opt-out),B2B Person (don't send),Other (opt-in),In more than one segment (check manually)
+Test Person,testperson@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+,blankperson@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+  ,spaceperson@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+ ,emptyperson@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+Blank Email,,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+Space Email, ,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+Test Person 2,threenames@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+Test PERSON3,uppercaselastname@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+TEST Person4,uppercasefirstname@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+TEST Person LONGER,uppercasethreenames@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+Test Person5,UPPERCASEEMAIL@EMAIL.COM,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+Duplicate Name,nonduplicateemail@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+Duplicate Name,differentemail@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+Duplicate Email,duplicateemail@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE
+Duplicate Email2,duplicateemail@email.com,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+Duplicate,duplicate@email.com,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+Updated Duplicate,duplicate@email.com,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
