@@ -30,9 +30,12 @@ class Contact < ApplicationRecord
   end
 
   def self.update_from_row(row, existing_record)
+    new_first_name = first_name(row["Name"]).nil? ? existing_record.first_name : first_name(row["Name"])
+    new_last_name  = last_name(row["Name"]).nil?  ? existing_record.last_name  : last_name(row["Name"])
+
     existing_record.update(
-      first_name:     first_name(row["Name"]),
-      last_name:      last_name(row["Name"]),
+      first_name:     new_first_name,
+      last_name:      new_last_name,
       email:          sanitize_email(row["Email"]),
       b2c_customer:   row["B2C Customer (Opt-out)"]   == CSV_TRUE_VALUE,
       b2c_alumnus:    row["B2C Alumnus (Opt-out)"]    == CSV_TRUE_VALUE,

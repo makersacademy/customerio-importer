@@ -187,5 +187,12 @@ RSpec.describe Contact, type: :model do
       expect(updated_record.b2c_customer).to be true
       expect(updated_record.b2c_alumnus).to be false
     end
+
+    it 'doesn\'t override bona fide info with blanks or nils when updating records' do
+      updated_record = Contact.find_by_email("duplicate1@email.com")
+
+      expect(updated_record.first_name).to eq "Persistent"
+      expect(updated_record.last_name).to eq "Name"
+    end
   end
 end

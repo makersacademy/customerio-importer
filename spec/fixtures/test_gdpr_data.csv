@@ -16,3 +16,5 @@ Duplicate Email,duplicateemail@email.com,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALS
 Duplicate Email2,duplicateemail@email.com,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
 Duplicate,duplicate@email.com,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
 Updated Duplicate,duplicate@email.com,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
+Persistent Name,duplicate1@email.com,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+,duplicate1@email.com,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
