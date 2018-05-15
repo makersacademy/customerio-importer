@@ -1,24 +1,11 @@
-# README
+# CustomerIO Importer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Takes a CSV (from /data/gdpr_data.csv) and sanitizes the data neatly into a database.
 
-Things you may want to cover:
+From there, it can push data to CustomerIO, sort of (CIO doesn't allow contact creation through its API, but it's ok with contact updating).
 
-* Ruby version
+### Running it
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Ask Samm for the CSV, and the `.env`.
+2. `bundle`
+3. `rails s`.
