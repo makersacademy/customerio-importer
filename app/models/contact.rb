@@ -1,19 +1,33 @@
 require 'csv'
 
 class Contact < ApplicationRecord
+  EMAIL_LIST_SEPARATOR = ", ".freeze
+
   def name
     return nil unless first_name || last_name
     "#{first_name} #{last_name}".strip
   end
 
-  def self.import_from_csv(path_to_csv)
-    CSV.foreach(path_to_csv, headers: true) do |row|
-      next unless email_exists?(row)
+  def self.import_from_csv(path_to_csv, logs: false)
+    created = 0
+    updated = 0
+    skipped = 0
 
-      if existing_record = duplicate(row)
-        update_from_row(row, existing_record)
-      else
-        create_from_row(row)
+    CSV.foreach(path_to_csv, headers: true) do |row|
+      if logs
+        print "Processing row #{$.}. Created: #{created}. Updated: #{updated}. Skipped: #{skipped}.\n"
+      end
+
+      next skipped += 1 unless email_list = sanitized_email(row["Email"])
+
+      email_list.split(EMAIL_LIST_SEPARATOR).each do |email|
+        if existing_record = find_by_email(email)
+          update_from_row(row, email, existing_record)
+          updated += 1
+        else
+          create_from_row(row, email)
+          created += 1
+        end
       end
     end
   end
@@ -29,14 +43,14 @@ class Contact < ApplicationRecord
     where(first_name: first_name, last_name: last_names.join(" ")).first
   end
 
-  def self.update_from_row(row, existing_record)
+  def self.update_from_row(row, email, existing_record)
     new_first_name = first_name(row["Name"]).nil? ? existing_record.first_name : first_name(row["Name"])
     new_last_name  = last_name(row["Name"]).nil?  ? existing_record.last_name  : last_name(row["Name"])
 
     existing_record.update(
       first_name:     new_first_name,
       last_name:      new_last_name,
-      email:          sanitize_email(row["Email"]),
+      email:          email,
       b2c_customer:   row["B2C Customer (Opt-out)"]   == CSV_TRUE_VALUE,
       b2c_alumnus:    row["B2C Alumnus (Opt-out)"]    == CSV_TRUE_VALUE,
       b2c_apprentice: row["B2C Apprentice (Opt-out)"] == CSV_TRUE_VALUE,
@@ -46,7 +60,7 @@ class Contact < ApplicationRecord
     )
   end
 
-  def self.create_from_row(row)
+  def self.create_from_row(row, email)
     # Rows are as follows:
     # #<CSV::Row 
     #   "Name":"Test Person" 
@@ -62,7 +76,7 @@ class Contact < ApplicationRecord
     create(
       first_name:     first_name(row["Name"]),
       last_name:      last_name(row["Name"]),
-      email:          sanitize_email(row["Email"]),
+      email:          email,
       b2c_customer:   row["B2C Customer (Opt-out)"]   == CSV_TRUE_VALUE,
       b2c_alumnus:    row["B2C Alumnus (Opt-out)"]    == CSV_TRUE_VALUE,
       b2c_apprentice: row["B2C Apprentice (Opt-out)"] == CSV_TRUE_VALUE,
@@ -72,7 +86,7 @@ class Contact < ApplicationRecord
     )
   end
 
-  def self.sanitize_email(email)
+  def self.sanitized_email(email)
     return nil if email.blank?
     return email.downcase
   end
@@ -92,10 +106,10 @@ class Contact < ApplicationRecord
   end
 
   def self.email_exists?(row)
-    !sanitize_email(row["Email"]).nil?
+    !sanitized_email(row["Email"]).nil?
   end
 
-  def self.duplicate(row)
-    find_by_email(sanitize_email(row["Email"]))
+  def self.duplicate(email)
+    find_by_email(email)
   end
 end

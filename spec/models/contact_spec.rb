@@ -194,5 +194,13 @@ RSpec.describe Contact, type: :model do
       expect(updated_record.first_name).to eq "Persistent"
       expect(updated_record.last_name).to eq "Name"
     end
+
+    it 'creates a new record for each email in a comma-separated list' do
+      expect(Contact.find_by_email("email1@example.com").name).to eq "Email List"
+      expect(Contact.find_by_email("email2@example.com").name).to eq "Email List"
+      expect(Contact.find_by_email("email3@example.com").name).to eq "Email List"
+      expect(Contact.find_by_email("email4@example.com").name).to eq "Email List"
+      expect(Contact.find_by_email("email5@example.com").name).to eq "Email List"
+    end
   end
 end
