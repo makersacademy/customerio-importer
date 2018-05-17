@@ -16,6 +16,18 @@ module CustomerIO
       @analytics.flush
     end
 
+    def opt_in
+      @analytics.identify(user_id: @model.email, traits: opt_in_traits)
+      @analytics.flush
+      true
+    end
+
+    def opt_out
+      @analytics.identify(user_id: @model.email, traits: opt_out_traits)
+      @analytics.flush
+      true
+    end
+
     private
 
     def analytics_traits
@@ -30,6 +42,20 @@ module CustomerIO
         b2b_person:     @model.b2b_person,
         other:          @model.other,
         marketing_consent: marketing_consent?,
+      }
+    end
+
+    def opt_in_traits
+      {
+        email: @model.email,
+        marketing_consent: true
+      }
+    end
+
+    def opt_out_traits
+      {
+        email: @model.email,
+        marketing_consent: false
       }
     end
 

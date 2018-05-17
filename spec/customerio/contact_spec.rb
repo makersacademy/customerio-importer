@@ -222,4 +222,44 @@ RSpec.describe CustomerIO::Contact do
       contact.sync
     end
   end
+
+  describe '#opt_in' do
+    it 'updates CustomerIO with the user that just opted-in' do
+      model = Contact.new(email: "testperson@example.com")
+      model.save
+
+      client = double(flush: nil)
+      analytics = double(new: client)
+      contact = CustomerIO::Contact.new(model, analytics)
+
+      expect(client).to receive(:identify).with(
+        user_id: model.email,
+        traits: {
+          email: model.email,
+          marketing_consent: true
+      })
+
+      expect(contact.opt_in).to be true
+    end
+  end
+
+  describe '#opt_out' do
+    it 'updates CustomerIO with the user that just opted-out' do
+      model = Contact.new(email: "testperson@example.com")
+      model.save
+
+      client = double(flush: nil)
+      analytics = double(new: client)
+      contact = CustomerIO::Contact.new(model, analytics)
+
+      expect(client).to receive(:identify).with(
+        user_id: model.email,
+        traits: {
+          email: model.email,
+          marketing_consent: false
+      })
+
+      expect(contact.opt_out).to be true
+    end
+  end
 end
