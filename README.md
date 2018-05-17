@@ -9,11 +9,11 @@ Takes a CSV of GDPR data and sanitizes the data neatly into a database. Then pus
 
 ### Using it
 
-Two main tasks: import from the CSV, and export to CustomerIO:
+Three main tasks: import from the CSV, generate opt strings, and export to CustomerIO:
 
 - `rake import:master` expects a file called `gdpr_data.csv` in a root directory called `data`. It imports all the data from the CSV and tidies it into the database for upload.
+- `rake import:generate_random_opt_strings` generates random opt strings for users. These are used in the CustomerIO campaigns to generate custom opt-in pages that can update an API that updates CustomerIO later on.
 - `rake sync:all` expects the database to be full of tidy data. Then it uploads people one-by-one to CustomerIO. It will update people if they already exist, or create new people.
-
 
 #### Testing
 
