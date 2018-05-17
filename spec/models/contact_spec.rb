@@ -68,6 +68,20 @@ RSpec.describe Contact, type: :model do
     end
   end
 
+  describe '.generate_random_opt_strings' do
+    it 'generates a random character opt string for each person in the database' do
+      Contact.create(email: "testperson@example.com")
+
+      allow(SecureRandom).to receive(:hex).and_return('securestring')
+
+      Contact.generate_random_opt_strings
+
+      contact = Contact.find_by_email("testperson@example.com")
+
+      expect(contact.random_opt_string).to eq 'securestringsecurestring'
+    end
+  end
+
   describe '.import_from_csv' do
     before do
       Contact.import_from_csv(csv_path)

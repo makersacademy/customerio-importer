@@ -8,6 +8,13 @@ class Contact < ApplicationRecord
     "#{first_name} #{last_name}".strip
   end
 
+  def self.generate_random_opt_strings
+    all.each do |contact|
+      contact.random_opt_string = "#{SecureRandom.hex}#{SecureRandom.hex}"
+      contact.save
+    end
+  end
+
   def self.import_from_csv(path_to_csv, logs: false)
     created = 0
     updated = 0
