@@ -41,6 +41,7 @@ module CustomerIO
         b2c_fellow:     @model.b2c_fellow,
         b2b_person:     @model.b2b_person,
         other:          @model.other,
+        opt_in_uuid:    @model.random_opt_string,
         marketing_consent: marketing_consent?,
       }
     end
