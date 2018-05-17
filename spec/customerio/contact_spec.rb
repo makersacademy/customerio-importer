@@ -20,13 +20,15 @@ RSpec.describe CustomerIO::Contact do
       )
 
       model.save
-      analytics = double
+      client = double(flush: nil)
+      analytics = double(new: client)
       contact = CustomerIO::Contact.new(model, analytics)
 
-      expect(analytics).to receive(:identify).with("testemail@example.com", {
+      expect(client).to receive(:identify).with(
+        user_id: "testemail@example.com",
         traits: {
-          first_name: "Test",
-          last_name: "Person",
+          firstName: "Test",
+          lastName: "Person",
           email: "testemail@example.com",
           b2c_customer: true,
           b2c_alumnus: false,
@@ -34,8 +36,7 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: false,
           other: false,
-          marketing_consent_given: true
-        }
+          marketing_consent: true
       })
 
       contact.sync
@@ -55,13 +56,15 @@ RSpec.describe CustomerIO::Contact do
       )
       
       model.save
-      analytics = double
+      client = double(flush: nil)
+      analytics = double(new: client)
       contact = CustomerIO::Contact.new(model, analytics)
 
-      expect(analytics).to receive(:identify).with("testemail@example.com", {
+      expect(client).to receive(:identify).with(
+        user_id: "testemail@example.com",
         traits: {
-          first_name: "Test",
-          last_name: "Person",
+          firstName: "Test",
+          lastName: "Person",
           email: "testemail@example.com",
           b2c_customer: false,
           b2c_alumnus: true,
@@ -69,8 +72,7 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: false,
           other: false,
-          marketing_consent_given: true
-        }
+          marketing_consent: true
       })
 
       contact.sync
@@ -90,13 +92,15 @@ RSpec.describe CustomerIO::Contact do
       )
       
       model.save
-      analytics = double
+      client = double(flush: nil)
+      analytics = double(new: client)
       contact = CustomerIO::Contact.new(model, analytics)
 
-      expect(analytics).to receive(:identify).with("testemail@example.com", {
+      expect(client).to receive(:identify).with(
+        user_id: "testemail@example.com",
         traits: {
-          first_name: "Test",
-          last_name: "Person",
+          firstName: "Test",
+          lastName: "Person",
           email: "testemail@example.com",
           b2c_customer: false,
           b2c_alumnus: false,
@@ -104,8 +108,7 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: false,
           other: false,
-          marketing_consent_given: true
-        }
+          marketing_consent: true
       })
 
       contact.sync
@@ -125,13 +128,15 @@ RSpec.describe CustomerIO::Contact do
       )
       
       model.save
-      analytics = double
+      client = double(flush: nil)
+      analytics = double(new: client)
       contact = CustomerIO::Contact.new(model, analytics)
 
-      expect(analytics).to receive(:identify).with("testemail@example.com", {
+      expect(client).to receive(:identify).with(
+        user_id: "testemail@example.com",
         traits: {
-          first_name: "Test",
-          last_name: "Person",
+          firstName: "Test",
+          lastName: "Person",
           email: "testemail@example.com",
           b2c_customer: false,
           b2c_alumnus: false,
@@ -139,8 +144,7 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: true,
           b2b_person: false,
           other: false,
-          marketing_consent_given: true
-        }
+          marketing_consent: true
       })
 
       contact.sync
@@ -160,13 +164,15 @@ RSpec.describe CustomerIO::Contact do
       )
       
       model.save
-      analytics = double
+      client = double(flush: nil)
+      analytics = double(new: client)
       contact = CustomerIO::Contact.new(model, analytics)
 
-      expect(analytics).to receive(:identify).with("testemail@example.com", {
+      expect(client).to receive(:identify).with(
+        user_id: "testemail@example.com",
         traits: {
-          first_name: "Test",
-          last_name: "Person",
+          firstName: "Test",
+          lastName: "Person",
           email: "testemail@example.com",
           b2c_customer: false,
           b2c_alumnus: false,
@@ -174,8 +180,7 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: true,
           other: false,
-          marketing_consent_given: false
-        }
+          marketing_consent: false
       })
 
       contact.sync
@@ -195,13 +200,15 @@ RSpec.describe CustomerIO::Contact do
       )
       
       model.save
-      analytics = double
+      client = double(flush: nil)
+      analytics = double(new: client)
       contact = CustomerIO::Contact.new(model, analytics)
 
-      expect(analytics).to receive(:identify).with("testemail@example.com", {
+      expect(client).to receive(:identify).with(
+        user_id: "testemail@example.com",
         traits: {
-          first_name: "Test",
-          last_name: "Person",
+          firstName: "Test",
+          lastName: "Person",
           email: "testemail@example.com",
           b2c_customer: false,
           b2c_alumnus: false,
@@ -209,8 +216,7 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: false,
           other: true,
-          marketing_consent_given: false
-        }
+          marketing_consent: false
       })
 
       contact.sync
