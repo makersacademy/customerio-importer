@@ -3,6 +3,18 @@ require './lib/customerio/contact'
 namespace :sync do
   desc "Syncs all contact data to CustomerIO"
   task :all => :environment do
+    errors = []
+
+    Contact.all.each do |contact|
+      print "Syncing Contact: #{contact.email}...\n"
+      customerio_contact = CustomerIO::Contact.new(contact, Segment::Analytics, errors)
+      customerio_contact.sync
+    end
+
+    if errors.any?
+      print "Errors:\n"
+      errors.each { |error| print "#{error}\n" }
+    end
   end
 
   desc "Creates seed data for testing if it doesn't exist"
@@ -177,7 +189,7 @@ namespace :sync do
 
     test_emails.each do |test_email|
       test_contact = Contact.find_by_email(test_email)
-      
+
       if test_contact.nil?
         errors << "No contact with email #{test_email} in database." unless test_contact
       else
