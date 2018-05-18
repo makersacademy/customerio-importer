@@ -5,7 +5,9 @@ class ContactsController < ApplicationController
     p params
     contact = Contact.find_by_random_opt_string(params["opt_in_uuid"])
     p contact
+    p CustomerIO::Contact.new(contact)
     @success = CustomerIO::Contact.new(contact).opt_in
+    p @success
   rescue
     redirect_to error_url
   end
@@ -14,7 +16,9 @@ class ContactsController < ApplicationController
     p params
     contact = Contact.find_by_random_opt_string(params["opt_in_uuid"])
     p contact
+    p CustomerIO::Contact.new(contact)
     @success = CustomerIO::Contact.new(contact).opt_out
+    p @success
   rescue
     redirect_to error_url
   end

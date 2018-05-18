@@ -16,7 +16,8 @@ RSpec.describe CustomerIO::Contact do
         b2c_apprentice: false,
         b2c_fellow: false,
         b2b_person: false,
-        other: false
+        other: false,
+        random_opt_string: 'secretstring'
       )
 
       model.save
@@ -36,7 +37,8 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: false,
           other: false,
-          marketing_consent: true
+          marketing_consent: true,
+          opt_in_uuid: 'secretstring'
       })
 
       contact.sync
@@ -52,7 +54,8 @@ RSpec.describe CustomerIO::Contact do
         b2c_apprentice: false,
         b2c_fellow: false,
         b2b_person: false,
-        other: false
+        other: false,
+        random_opt_string: 'secretstring'
       )
       
       model.save
@@ -72,7 +75,8 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: false,
           other: false,
-          marketing_consent: true
+          marketing_consent: true,
+          opt_in_uuid: 'secretstring'
       })
 
       contact.sync
@@ -88,7 +92,8 @@ RSpec.describe CustomerIO::Contact do
         b2c_apprentice: true,
         b2c_fellow: false,
         b2b_person: false,
-        other: false
+        other: false,
+        random_opt_string: 'secretstring'
       )
       
       model.save
@@ -108,7 +113,8 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: false,
           other: false,
-          marketing_consent: true
+          marketing_consent: true,
+          opt_in_uuid: 'secretstring'
       })
 
       contact.sync
@@ -124,7 +130,8 @@ RSpec.describe CustomerIO::Contact do
         b2c_apprentice: false,
         b2c_fellow: true,
         b2b_person: false,
-        other: false
+        other: false,
+        random_opt_string: 'secretstring'
       )
       
       model.save
@@ -144,7 +151,8 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: true,
           b2b_person: false,
           other: false,
-          marketing_consent: true
+          marketing_consent: true,
+          opt_in_uuid: 'secretstring'
       })
 
       contact.sync
@@ -160,7 +168,8 @@ RSpec.describe CustomerIO::Contact do
         b2c_apprentice: false,
         b2c_fellow: false,
         b2b_person: true,
-        other: false
+        other: false,
+        random_opt_string: 'secretstring'
       )
       
       model.save
@@ -180,7 +189,8 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: true,
           other: false,
-          marketing_consent: false
+          marketing_consent: false,
+          opt_in_uuid: 'secretstring'
       })
 
       contact.sync
@@ -196,7 +206,8 @@ RSpec.describe CustomerIO::Contact do
         b2c_apprentice: false,
         b2c_fellow: false,
         b2b_person: false,
-        other: true
+        other: true,
+        random_opt_string: 'secretstring'
       )
       
       model.save
@@ -216,7 +227,8 @@ RSpec.describe CustomerIO::Contact do
           b2c_fellow: false,
           b2b_person: false,
           other: true,
-          marketing_consent: false
+          marketing_consent: false,
+          opt_in_uuid: 'secretstring'
       })
 
       contact.sync
@@ -256,10 +268,10 @@ RSpec.describe CustomerIO::Contact do
         user_id: model.email,
         traits: {
           email: model.email,
-          marketing_consent: false
+          marketing_consent: true
       })
 
-      expect(contact.opt_out).to be true
+      expect(contact.opt_in).to be true
     end
   end
 end
