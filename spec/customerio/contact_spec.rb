@@ -1,3 +1,4 @@
+require "rails_helper"
 require "customerio/contact"
 
 RSpec.describe CustomerIO::Contact do
@@ -38,7 +39,10 @@ RSpec.describe CustomerIO::Contact do
           b2b_person: false,
           other: false,
           marketing_consent: true,
-          opt_in_uuid: 'secretstring'
+          opt_in_uuid: 'secretstring',
+          date_consent_given: "#{Time.now}",
+          hs_legal_basis: "Legitimate interest - existing customer",
+          legal_basis: "Legitimate interest - existing customer"
       })
 
       contact.sync
@@ -76,7 +80,10 @@ RSpec.describe CustomerIO::Contact do
           b2b_person: false,
           other: false,
           marketing_consent: true,
-          opt_in_uuid: 'secretstring'
+          opt_in_uuid: 'secretstring',
+          date_consent_given: "#{Time.now}",
+          hs_legal_basis: "Legitimate interest - existing customer",
+          legal_basis: "Legitimate interest - existing customer"
       })
 
       contact.sync
@@ -114,7 +121,10 @@ RSpec.describe CustomerIO::Contact do
           b2b_person: false,
           other: false,
           marketing_consent: true,
-          opt_in_uuid: 'secretstring'
+          opt_in_uuid: 'secretstring',
+          date_consent_given: "#{Time.now}",
+          hs_legal_basis: "Legitimate interest - existing customer",
+          legal_basis: "Legitimate interest - existing customer"
       })
 
       contact.sync
@@ -152,7 +162,10 @@ RSpec.describe CustomerIO::Contact do
           b2b_person: false,
           other: false,
           marketing_consent: true,
-          opt_in_uuid: 'secretstring'
+          opt_in_uuid: 'secretstring',
+          date_consent_given: "#{Time.now}",
+          hs_legal_basis: "Legitimate interest - existing customer",
+          legal_basis: "Legitimate interest - existing customer"
       })
 
       contact.sync
@@ -190,7 +203,10 @@ RSpec.describe CustomerIO::Contact do
           b2b_person: true,
           other: false,
           marketing_consent: false,
-          opt_in_uuid: 'secretstring'
+          opt_in_uuid: 'secretstring',
+          date_consent_given: nil,
+          hs_legal_basis: "Legitimate interest - prospect/lead",
+          legal_basis: "Legitimate interest - prospect/lead"
       })
 
       contact.sync
@@ -228,7 +244,10 @@ RSpec.describe CustomerIO::Contact do
           b2b_person: false,
           other: true,
           marketing_consent: false,
-          opt_in_uuid: 'secretstring'
+          opt_in_uuid: 'secretstring',
+          date_consent_given: nil,
+          hs_legal_basis: "Not applicable",
+          legal_basis: "Not applicable"
       })
 
       contact.sync
@@ -248,7 +267,10 @@ RSpec.describe CustomerIO::Contact do
         user_id: model.email,
         traits: {
           email: model.email,
-          marketing_consent: true
+          marketing_consent: true,
+          date_consent_given: "#{Time.now}",
+          hs_legal_basis: "Freely given consent from contact",
+          legal_basis: "Freely given consent from contact"
       })
 
       expect(contact.opt_in).to be true
@@ -268,10 +290,13 @@ RSpec.describe CustomerIO::Contact do
         user_id: model.email,
         traits: {
           email: model.email,
-          marketing_consent: true
+          marketing_consent: false,
+          date_consent_given: nil,
+          hs_legal_basis: "Not applicable",
+          legal_basis: "Not applicable"
       })
 
-      expect(contact.opt_in).to be true
+      expect(contact.opt_out).to be true
     end
   end
 end
