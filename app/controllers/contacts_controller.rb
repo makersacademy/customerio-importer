@@ -8,8 +8,8 @@ class ContactsController < ApplicationController
     p CustomerIO::Contact.new(contact)
     @success = CustomerIO::Contact.new(contact).opt_in
     p @success
-  rescue
-    redirect_to error_url
+  # rescue
+  #   redirect_to error_url
   end
 
   def opt_out
@@ -19,8 +19,8 @@ class ContactsController < ApplicationController
     p CustomerIO::Contact.new(contact)
     @success = CustomerIO::Contact.new(contact).opt_out
     p @success
-  rescue
-    redirect_to error_url
+  # rescue
+  #   redirect_to error_url
   end
 
   def error
